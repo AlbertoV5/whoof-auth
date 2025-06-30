@@ -1,6 +1,6 @@
-# @whoof/auth
+# Whop Apps Framework - Auth
 
-Authentication library for Whoof applications providing user authentication, caching, and access control.
+Authentication library for Whop applications providing user authentication, caching, and access control.
 
 ## Usage
 
