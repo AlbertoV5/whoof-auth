@@ -44,7 +44,7 @@
     "typescript": "^5"
   },
   "peerDependencies": {
-    "@whop/api": "^1.0.0",
+    "@whop/api": "^0.0.29",
     "next": "^14.0.0",
     "react": "^18.0.0",
     "typescript": "^5"
