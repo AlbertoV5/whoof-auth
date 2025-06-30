@@ -1,4 +1,52 @@
-# Whoof - Auth
+# @whoof/auth
+
+Authentication library for Whoof applications providing user authentication, caching, and access control.
+
+## Usage
+
+### Basic Authentication
+
+```ts
+import { getAuthenticatedUser, Authenticated } from '@whoof/auth'
+
+// Get authenticated user
+const user = await getAuthenticatedUser(experienceId)
+
+// Use higher-order function for protected routes
+const protectedFunction = Authenticated(
+  { 
+    requiredAccessLevel: 'admin',
+    requiredUserStatus: 'creator' 
+  },
+  async ({ userData, experienceId, ...props }) => {
+    // Your protected logic here
+    return { success: true, user: userData }
+  }
+)
+```
+
+## API Reference
+
+### `getAuthenticatedUser(experienceId: string)`
+
+Cache user authentication for the entire request.
+
+**Parameters:**
+- `experienceId`: The experience ID to authenticate against
+
+**Returns:** User authentication data or null if not authenticated
+
+### `Authenticated<Inputs, Output>(options, wrapped)`
+
+Higher-order function that adds authentication to any function.
+
+**Parameters:**
+- `options`: Configuration object with `requiredAccessLevel` and `requiredUserStatus`
+- `wrapped`: The function to wrap with authentication
+
+**Returns:** Authenticated version of the wrapped function
+
+## Development
 
 To install dependencies:
 
@@ -9,8 +57,26 @@ bun install
 To run:
 
 ```bash
-bun run index.ts
+bun run dev
 ```
+
+To build:
+
+```bash
+bun run build
+```
+
+To check types:
+
+```bash
+bun run typecheck
+```
+
+## License
+
+MIT
+
+---
 
 This project was created using `bun init` in bun v1.2.17. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
 
@@ -20,7 +86,7 @@ This project was created using `bun init` in bun v1.2.17. [Bun](https://bun.sh) 
 ```ts
 // Cache user authentication for the entire request
 export const getAuthenticatedUser = cache(async (experienceId: string) => {
-  const developerUserIds = ["user_nqcSNuC2wyKVx"]
+  const developerUserIds = []
   return getCachedUserAuthentication(
     whopSdk,
     experienceId,
