@@ -1,4 +1,4 @@
-# lib-watt
+# Whoof - Auth
 
 To install dependencies:
 
