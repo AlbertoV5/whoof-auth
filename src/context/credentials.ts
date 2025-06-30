@@ -104,9 +104,3 @@ export function createAuthenticationFunction(config: AuthenticationConfig) {
     }
   }
 }
-
-const propsIncludeExperienceId = (
-  props: Record<string, any>
-): props is Record<string, any> & { experienceId: string } => {
-  return "experienceId" in props
-}
