@@ -25,7 +25,44 @@ export const getCachedUserAccess = cache(
   }
 )
 
-// Cache the complete user authentication data
+// Cache individual product access checks
+export const getCachedProductAccess = cache(
+  async (sdk: Sdk, userId: string, productId: string) => {
+    try {
+      const hasAccess = await sdk.access.checkIfUserHasAccessToProduct({
+        userId,
+        productId,
+      })
+      return hasAccess.hasAccess
+    } catch (error) {
+      // Failed to check access, return false
+      return false
+    }
+  }
+)
+
+// Cache multiple product access checks
+export const getCachedMultipleProductAccess = cache(
+  async (sdk: Sdk, userId: string, productIds: string[]) => {
+    const productAccess: Record<string, boolean> = {}
+    
+    // Use Promise.all to check all products in parallel for better performance
+    const accessPromises = productIds.map(async (productId) => {
+      const hasAccess = await getCachedProductAccess(sdk, userId, productId)
+      return { productId, hasAccess }
+    })
+    
+    const results = await Promise.all(accessPromises)
+    
+    for (const result of results) {
+      productAccess[result.productId] = result.hasAccess
+    }
+    
+    return productAccess
+  }
+)
+
+// Cache the complete user authentication data with product access
 export const getCachedUserAuthentication = cache(
   async (
     sdk: Sdk,
@@ -34,7 +71,8 @@ export const getCachedUserAuthentication = cache(
       userId: string
       accessLevel: WhopExperienceAccessLevel
     }) => UserAppStatus | null,
-    preUserAuth?: (headersList: Headers) => Promise<PreUserAuthResult | null>
+    preUserAuth?: (headersList: Headers) => Promise<PreUserAuthResult | null>,
+    requiredProducts?: string[]
   ): Promise<UserData | null> => {
     const headersList = await headers()
 
@@ -64,10 +102,43 @@ export const getCachedUserAuthentication = cache(
       return null
     }
 
+    // Get cached product access if required
+    let productAccess: Record<string, boolean> = {}
+    if (requiredProducts && requiredProducts.length > 0) {
+      productAccess = await getCachedMultipleProductAccess(
+        sdk,
+        user.userId,
+        requiredProducts
+      )
+    }
+
     return {
       userId: user.userId,
       userStatus,
       userAccessLevel: hasAccess.accessLevel,
+      productAccess,
     }
+  }
+)
+
+// Helper function to get user data with specific product access requirements
+export const getCachedUserWithProductAccess = cache(
+  async (
+    sdk: Sdk,
+    experienceId: string,
+    getUserStatus: (params: {
+      userId: string
+      accessLevel: WhopExperienceAccessLevel
+    }) => UserAppStatus | null,
+    productIds: string[],
+    preUserAuth?: (headersList: Headers) => Promise<PreUserAuthResult | null>
+  ): Promise<UserData | null> => {
+    return getCachedUserAuthentication(
+      sdk,
+      experienceId,
+      getUserStatus,
+      preUserAuth,
+      productIds
+    )
   }
 )
