@@ -68,7 +68,6 @@ export function createAuthenticationFunction(config: AuthenticationConfig) {
       if (!user) {
         throw new Error("Unauthorized")
       }
-      console.log("User", user)
       // Get user access to the experience
       const hasAccess =
         await config.sdk.access.checkIfUserHasAccessToExperience({

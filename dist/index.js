@@ -6799,9 +6799,27 @@ var sdk2 = makeWhopServerSdk({ uploadFile: uploadFile2 });
 // src/context/experience.ts
 import { AsyncLocalStorage } from "async_hooks";
 var asyncLocalStorage = new AsyncLocalStorage;
-function withExperienceContext(experienceId, fn, userId) {
-  const context = { experienceId, userId };
-  return asyncLocalStorage.run(context, fn);
+async function withExperience(options) {
+  const { sdk: sdk3, experienceId, view, userId, experience } = options;
+  let finalExperience = experience;
+  if (!finalExperience) {
+    const fetchedExperience = await sdk3.experiences.getExperience({
+      experienceId
+    });
+    if (!fetchedExperience) {
+      throw new Error(`Experience with ID ${experienceId} not found`);
+    }
+    finalExperience = fetchedExperience;
+  }
+  if (!finalExperience) {
+    throw new Error(`Experience is required but not provided for experienceId: ${experienceId}`);
+  }
+  const context = {
+    experienceId,
+    userId,
+    experience: finalExperience
+  };
+  return asyncLocalStorage.run(context, () => view(finalExperience));
 }
 function getExperienceId() {
   const context = asyncLocalStorage.getStore();
@@ -6814,12 +6832,43 @@ function getUserId() {
   const context = asyncLocalStorage.getStore();
   return context?.userId;
 }
+function getCachedExperience() {
+  const context = asyncLocalStorage.getStore();
+  return context?.experience;
+}
+function setCachedExperience(experience) {
+  const context = asyncLocalStorage.getStore();
+  if (!context) {
+    throw new Error("No context found. Make sure you are calling this within withExperienceContext.");
+  }
+  context.experience = experience;
+}
+async function getOrFetchExperience(fetcher) {
+  const cached = getCachedExperience();
+  if (cached) {
+    return cached;
+  }
+  const experienceId = getExperienceId();
+  const experience = await fetcher(experienceId);
+  if (!experience) {
+    throw new Error(`Experience with ID ${experienceId} not found`);
+  }
+  setCachedExperience(experience);
+  return experience;
+}
 function getContext() {
   return asyncLocalStorage.getStore();
 }
 function hasExperienceContext() {
   const context = asyncLocalStorage.getStore();
   return !!context?.experienceId;
+}
+function getExperience() {
+  const experience = getCachedExperience();
+  if (!experience) {
+    throw new Error("Experience not found in context. Make sure the experience has been fetched and cached in the layout.");
+  }
+  return experience;
 }
 
 // ../../node_modules/next/headers.js
@@ -6851,7 +6900,6 @@ function createAuthenticationFunction(config) {
       if (!user) {
         throw new Error("Unauthorized");
       }
-      console.log("User", user);
       const hasAccess = await config.sdk.access.checkIfUserHasAccessToExperience({
         userId: user.userId,
         experienceId
@@ -6917,13 +6965,17 @@ var getCachedUserAuthentication = import_react.cache(async (sdk3, experienceId, 
   };
 });
 export {
-  withExperienceContext,
+  withExperience,
+  setCachedExperience,
   hasExperienceContext,
   getUserId,
+  getOrFetchExperience,
   getExperienceId,
+  getExperience,
   getContext,
   getCachedUserToken,
   getCachedUserAuthentication,
   getCachedUserAccess,
+  getCachedExperience,
   createAuthenticationFunction
 };
