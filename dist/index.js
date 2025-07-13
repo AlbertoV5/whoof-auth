@@ -5305,7 +5305,7 @@ async function jwtVerify(jwt, key, options) {
   }
   return result;
 }
-// ../../node_modules/@whop/api/dist/chunk-LNQ2DCMC.mjs
+// ../../node_modules/@whop/api/dist/chunk-WYHVVPYG.mjs
 var import_js_md5 = __toESM(require_md5(), 1);
 var import_tiny_typed_emitter = __toESM(require_lib(), 1);
 var __defProp2 = Object.defineProperty;
@@ -5389,6 +5389,8 @@ __export(index_common_exports, {
   AccessPass_Visibility: () => AccessPass_Visibility,
   AccessType: () => AccessType,
   ActiveUserBucket_UserBucketType: () => ActiveUserBucket_UserBucketType,
+  AppBuild_Status: () => AppBuild_Status,
+  AppViewType: () => AppViewType,
   ChannelSubscriptionState_DisconnectionReason: () => ChannelSubscriptionState_DisconnectionReason,
   Channel_Type: () => Channel_Type,
   ConnectedId_Type: () => ConnectedId_Type,
@@ -5444,6 +5446,13 @@ var User_PlatformRole = {
   RESOLUTION_CENTER_MANAGER: "RESOLUTION_CENTER_MANAGER",
   UNRECOGNIZED: "UNRECOGNIZED"
 };
+var AppViewType = {
+  APP_VIEW_TYPE_UNKNOWN: "APP_VIEW_TYPE_UNKNOWN",
+  APP_VIEW_TYPE_HUB: "APP_VIEW_TYPE_HUB",
+  APP_VIEW_TYPE_DASH: "APP_VIEW_TYPE_DASH",
+  APP_VIEW_TYPE_ANALYTICS: "APP_VIEW_TYPE_ANALYTICS",
+  UNRECOGNIZED: "UNRECOGNIZED"
+};
 var AccessType = {
   UNKNOWN_ACCESS_TYPE: "UNKNOWN_ACCESS_TYPE",
   NO_ACCESS: "NO_ACCESS",
@@ -5456,6 +5465,14 @@ var Platform = {
   WEB: "WEB",
   IOS: "IOS",
   ANDROID: "ANDROID",
+  UNRECOGNIZED: "UNRECOGNIZED"
+};
+var AppBuild_Status = {
+  STATUS_UNKNOWN: "STATUS_UNKNOWN",
+  STATUS_DRAFT: "STATUS_DRAFT",
+  STATUS_PENDING: "STATUS_PENDING",
+  STATUS_APPROVED: "STATUS_APPROVED",
+  STATUS_REJECTED: "STATUS_REJECTED",
   UNRECOGNIZED: "UNRECOGNIZED"
 };
 var AccessPass_Visibility = {
@@ -5544,65 +5561,6 @@ var Position_Type = {
   UNKNOWN: "UNKNOWN",
   MOUSE: "MOUSE",
   PLAYER: "PLAYER",
-  UNRECOGNIZED: "UNRECOGNIZED"
-};
-var ProductSurface_ViewContext = {
-  VIEW_CTX_UNKNOWN: "VIEW_CTX_UNKNOWN",
-  VIEW_CTX_WHOP: "VIEW_CTX_WHOP",
-  VIEW_CTX_HOME_FEED: "VIEW_CTX_HOME_FEED",
-  UNRECOGNIZED: "UNRECOGNIZED"
-};
-var ProductSurface_DiscoverSection = {
-  DISCOVER_UNKNOWN: "DISCOVER_UNKNOWN",
-  DISCOVER_LEADERBOARDS: "DISCOVER_LEADERBOARDS",
-  DISCOVER_FOR_YOU: "DISCOVER_FOR_YOU",
-  DISCOVER_EXPLORE: "DISCOVER_EXPLORE",
-  UNRECOGNIZED: "UNRECOGNIZED"
-};
-var ProductSurface_FeedTab = {
-  FEED_TAB_UNKNOWN: "FEED_TAB_UNKNOWN",
-  FEED_TAB_HOME: "FEED_TAB_HOME",
-  FEED_TAB_EARN: "FEED_TAB_EARN",
-  FEED_TAB_CHAT: "FEED_TAB_CHAT",
-  FEED_TAB_LEARN: "FEED_TAB_LEARN",
-  FEED_TAB_CALENDAR: "FEED_TAB_CALENDAR",
-  FEED_TAB_PLAY: "FEED_TAB_PLAY",
-  FEED_TAB_INTEGRATIONS: "FEED_TAB_INTEGRATIONS",
-  FEED_TAB_TOOLS: "FEED_TAB_TOOLS",
-  UNRECOGNIZED: "UNRECOGNIZED"
-};
-var ProductSurface_SurfaceType = {
-  UNKNOWN: "UNKNOWN",
-  EXPERIENCE: "EXPERIENCE",
-  WHOP: "WHOP",
-  CREATOR_DASHBOARD: "CREATOR_DASHBOARD",
-  AFFILIATE_DASHBOARD: "AFFILIATE_DASHBOARD",
-  DISCOVER: "DISCOVER",
-  HOME_FEED: "HOME_FEED",
-  MESSAGES: "MESSAGES",
-  PROFILE: "PROFILE",
-  NOTIFICATIONS: "NOTIFICATIONS",
-  USER_SETTINGS: "USER_SETTINGS",
-  CHECKOUT: "CHECKOUT",
-  AUTH: "AUTH",
-  OTHER: "OTHER",
-  USER_ONBOARDING: "USER_ONBOARDING",
-  LEADERBOARD: "LEADERBOARD",
-  UNRECOGNIZED: "UNRECOGNIZED"
-};
-var ActiveUserBucket_UserBucketType = {
-  UNKNOWN: "UNKNOWN",
-  EXPERIENCE: "EXPERIENCE",
-  WHOP: "WHOP",
-  STORE_PAGE: "STORE_PAGE",
-  MESSAGES: "MESSAGES",
-  HOME_FEED: "HOME_FEED",
-  DISCOVER: "DISCOVER",
-  UNRECOGNIZED: "UNRECOGNIZED"
-};
-var GetTopExperiencesByActiveUsersRequest_AppFilter = {
-  ALL: "ALL",
-  LIVESTREAMS: "LIVESTREAMS",
   UNRECOGNIZED: "UNRECOGNIZED"
 };
 var FeedDmsPost_MessageType = {
@@ -5700,6 +5658,65 @@ var GoFetchNotifications_NotifyingEntityType = {
   ACCESS_PASS: "ACCESS_PASS",
   UNRECOGNIZED: "UNRECOGNIZED"
 };
+var ProductSurface_ViewContext = {
+  VIEW_CTX_UNKNOWN: "VIEW_CTX_UNKNOWN",
+  VIEW_CTX_WHOP: "VIEW_CTX_WHOP",
+  VIEW_CTX_HOME_FEED: "VIEW_CTX_HOME_FEED",
+  UNRECOGNIZED: "UNRECOGNIZED"
+};
+var ProductSurface_DiscoverSection = {
+  DISCOVER_UNKNOWN: "DISCOVER_UNKNOWN",
+  DISCOVER_LEADERBOARDS: "DISCOVER_LEADERBOARDS",
+  DISCOVER_FOR_YOU: "DISCOVER_FOR_YOU",
+  DISCOVER_EXPLORE: "DISCOVER_EXPLORE",
+  UNRECOGNIZED: "UNRECOGNIZED"
+};
+var ProductSurface_FeedTab = {
+  FEED_TAB_UNKNOWN: "FEED_TAB_UNKNOWN",
+  FEED_TAB_HOME: "FEED_TAB_HOME",
+  FEED_TAB_EARN: "FEED_TAB_EARN",
+  FEED_TAB_CHAT: "FEED_TAB_CHAT",
+  FEED_TAB_LEARN: "FEED_TAB_LEARN",
+  FEED_TAB_CALENDAR: "FEED_TAB_CALENDAR",
+  FEED_TAB_PLAY: "FEED_TAB_PLAY",
+  FEED_TAB_INTEGRATIONS: "FEED_TAB_INTEGRATIONS",
+  FEED_TAB_TOOLS: "FEED_TAB_TOOLS",
+  UNRECOGNIZED: "UNRECOGNIZED"
+};
+var ProductSurface_SurfaceType = {
+  UNKNOWN: "UNKNOWN",
+  EXPERIENCE: "EXPERIENCE",
+  WHOP: "WHOP",
+  CREATOR_DASHBOARD: "CREATOR_DASHBOARD",
+  AFFILIATE_DASHBOARD: "AFFILIATE_DASHBOARD",
+  DISCOVER: "DISCOVER",
+  HOME_FEED: "HOME_FEED",
+  MESSAGES: "MESSAGES",
+  PROFILE: "PROFILE",
+  NOTIFICATIONS: "NOTIFICATIONS",
+  USER_SETTINGS: "USER_SETTINGS",
+  CHECKOUT: "CHECKOUT",
+  AUTH: "AUTH",
+  OTHER: "OTHER",
+  USER_ONBOARDING: "USER_ONBOARDING",
+  LEADERBOARD: "LEADERBOARD",
+  UNRECOGNIZED: "UNRECOGNIZED"
+};
+var ActiveUserBucket_UserBucketType = {
+  UNKNOWN: "UNKNOWN",
+  EXPERIENCE: "EXPERIENCE",
+  WHOP: "WHOP",
+  STORE_PAGE: "STORE_PAGE",
+  MESSAGES: "MESSAGES",
+  HOME_FEED: "HOME_FEED",
+  DISCOVER: "DISCOVER",
+  UNRECOGNIZED: "UNRECOGNIZED"
+};
+var GetTopExperiencesByActiveUsersRequest_AppFilter = {
+  ALL: "ALL",
+  LIVESTREAMS: "LIVESTREAMS",
+  UNRECOGNIZED: "UNRECOGNIZED"
+};
 var ResourceType = {
   RESOURCE_UNKNOWN: "RESOURCE_UNKNOWN",
   RESOURCE_BOT: "RESOURCE_BOT",
@@ -5724,6 +5741,7 @@ var NullValue = {
   NULL_VALUE: "NULL_VALUE",
   UNRECOGNIZED: "UNRECOGNIZED"
 };
+var index_calendar_bookings_app_exports = {};
 var index_bounties_app_exports = {};
 __export(index_bounties_app_exports, {
   BountySubmission_BountySubmissionStatus: () => BountySubmission_BountySubmissionStatus,
@@ -5749,7 +5767,6 @@ var BountySubmission_BountySubmissionStatus = {
   DENIED: "DENIED",
   UNRECOGNIZED: "UNRECOGNIZED"
 };
-var index_calendar_bookings_app_exports = {};
 var index_content_app_exports = {};
 var index_content_rewards_app_exports = {};
 __export(index_content_rewards_app_exports, {
@@ -6143,7 +6160,7 @@ function getSdk(requester) {
   return {
     accessPasses: {
       getAccessPass(variables, options) {
-        return requester("whop-sdk-ts-client/sha256:205a889094d0224951fae60c2f4281893d475491014b0630fceb829707507889", "getAccessPass", "query", variables, options).then((res) => res.accessPass);
+        return requester("whop-sdk-ts-client/sha256:daea5c9cf3e5e30ef0fd9eaad8ea852ffdbd0e0088ff3ad05aacb6a761b7c6f9", "getAccessPass", "query", variables, options).then((res) => res.accessPass);
       }
     },
     attachments: {
@@ -6155,6 +6172,11 @@ function getSdk(requester) {
       },
       uploadMedia(variables, options) {
         return requester("whop-sdk-ts-client/sha256:a3d06ed16e52126d96aae83cad3400471246f37fc275e4c8f4836c98bf8e9d59", "uploadMedia", "mutation", { input: variables }, options).then((res) => res.mediaDirectUpload);
+      }
+    },
+    courses: {
+      getCourse(variables, options) {
+        return requester("whop-sdk-ts-client/sha256:a70e69bec7574d2b4498d2bee86bd97adb87480599cbceeca8f63135078fd5c9", "getCourse", "query", variables, options).then((res) => res.course);
       }
     },
     experiences: {
@@ -6457,7 +6479,7 @@ function getSdk2(requester) {
   return {
     accessPasses: {
       getAccessPass(variables, options) {
-        return requester("whop-sdk-ts-server/sha256:205a889094d0224951fae60c2f4281893d475491014b0630fceb829707507889", "getAccessPass", "query", variables, options).then((res) => res.accessPass);
+        return requester("whop-sdk-ts-server/sha256:daea5c9cf3e5e30ef0fd9eaad8ea852ffdbd0e0088ff3ad05aacb6a761b7c6f9", "getAccessPass", "query", variables, options).then((res) => res.accessPass);
       }
     },
     access: {
@@ -6469,6 +6491,11 @@ function getSdk2(requester) {
       },
       checkIfUserHasAccessToExperience(variables, options) {
         return requester("whop-sdk-ts-server/sha256:b16d7fe717171fb936dfb6de679558e149f5070bbe25ade44e38af83c330ad71", "checkIfUserHasAccessToExperience", "query", variables, options).then((res) => res.hasAccessToExperience);
+      }
+    },
+    apps: {
+      createAppBuild(variables, options) {
+        return requester("whop-sdk-ts-server/sha256:221275dcd40898079c1e7bc1510b364a487581d6cdfc1a9524da74f2f82689cc", "createAppBuild", "mutation", { input: variables }, options).then((res) => res.createAppBuild);
       }
     },
     attachments: {
@@ -6490,9 +6517,17 @@ function getSdk2(requester) {
         return requester("whop-sdk-ts-server/sha256:5ad1e4c5932d68eda92af2d709ecf6ad0afc8fb29e1ef2bd1448f61650b637d3", "getWaitlistEntriesForCompany", "query", variables, options).then((res) => res.company);
       }
     },
+    courses: {
+      getCourse(variables, options) {
+        return requester("whop-sdk-ts-server/sha256:a70e69bec7574d2b4498d2bee86bd97adb87480599cbceeca8f63135078fd5c9", "getCourse", "query", variables, options).then((res) => res.course);
+      }
+    },
     experiences: {
       getExperience(variables, options) {
         return requester("whop-sdk-ts-server/sha256:114eb7b7c8403ffbe75a0c74a26ac50b5367e183a16ba64eebf4a43d5466bb4e", "getExperience", "query", variables, options).then((res) => res.experience);
+      },
+      listAccessPassesForExperience(variables, options) {
+        return requester("whop-sdk-ts-server/sha256:699621f62be7675bfaf9fc49cb6d7abfe244bf691aee274cb492036f0b59bddc", "listAccessPassesForExperience", "query", variables, options).then((res) => res.experience);
       },
       listExperiences(variables, options) {
         return requester("whop-sdk-ts-server/sha256:6ca8515118d4710204bb2e32ea020bb98de8ea1cada4929ecfe7cae606cf6e79", "listExperiences", "query", variables, options).then((res) => res.company);
@@ -6574,6 +6609,7 @@ var WhopOAuth = class _WhopOAuth {
     oAuthUrl.searchParams.set("client_id", this.appId);
     oAuthUrl.searchParams.set("response_type", "code");
     oAuthUrl.searchParams.set("scope", scope.join(" "));
+    oAuthUrl.searchParams.set("state", state);
     if (redirectUri instanceof URL) {
       oAuthUrl.searchParams.set("redirect_uri", redirectUri.toString());
     } else {
