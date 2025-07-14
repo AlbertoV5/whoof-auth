@@ -37,7 +37,6 @@ export const getCachedUserAuthentication = cache(
     preUserAuth?: (headersList: Headers) => Promise<PreUserAuthResult | null>
   ): Promise<UserData | null> => {
     const headersList = await headers()
-
     // Check pre-user authentication if configured
     if (preUserAuth) {
       const preAuthResult = await preUserAuth(headersList)
@@ -45,13 +44,11 @@ export const getCachedUserAuthentication = cache(
         return preAuthResult.userData
       }
     }
-
     // Get cached user token
     const user = await getCachedUserToken()
     if (!user) {
       return null
     }
-
     // Get cached user access
     const hasAccess = await getCachedUserAccess(sdk, user.userId, experienceId)
 

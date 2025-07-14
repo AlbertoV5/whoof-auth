@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "dev": "bun run src/index.ts",
-    "build": "bun build src/index.ts --outdir dist --target node --format esm --splitting && bun run build:types",
+    "build": "bun build src/index.ts --outdir dist --target node --format esm --splitting --external next/headers --external next/cookies --external next/draft-mode --external react && bun run build:types",
     "build:types": "tsc --emitDeclarationOnly --outDir dist",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "bun run build"
